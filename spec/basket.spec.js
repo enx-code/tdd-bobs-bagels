@@ -53,7 +53,21 @@ describe('Basket', () => {
     basket.add('BGLO')
     basket.remove('BGLO')
     expect(basket.items).toEqual([])
-
   })
-//   it()
+
+  it('remove function will return the bagel that has been removed from basket', ()=>{
+    basket.add('BGLO')
+    const removed = basket.remove('BGLO')
+    expect(removed).toEqual({
+        sku: 'BGLO',
+        price: '0.49',
+        name: 'Bagel',
+        variant: 'Onion',
+        quantity: 1
+    })
+  })
+  it('if bagel is not in the basket, remove function will return false', ()=>{
+    const dontHave = basket.remove("Do not have!")
+    expect(dontHave).toBe(false)
+  })
 })
