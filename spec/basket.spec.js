@@ -5,10 +5,55 @@ describe('Basket', () => {
   beforeEach(() => {
     basket = new Basket()
   })
-  it("nvnv", (()=>{}))
+
+  it("adds a bagel if Bagel doesn't already exist in the basket", () => {
+    const bagel = basket.add('BGLO')
+
+    expect(bagel).toEqual({
+      sku: 'BGLO',
+      price: '0.49',
+      name: 'Bagel',
+      variant: 'Onion',
+      quantity: 1
+    })
+  })
+
+  it('should return false if basket is at capacity', () => {
+    const myBasket = new Basket(2)
+    myBasket.add('BGLO')
+    myBasket.add('BGLP')
+    const result = myBasket.add('BGLE')
+
+    expect(result).toBeFalse()
+  })
+
+  it('should update the quantity on found bagels', () => {
+    basket.add('BGLO')
+    const bagel = basket.add('BGLO')
+
+    expect(bagel).toEqual({
+      sku: 'BGLO',
+      price: '0.49',
+      name: 'Bagel',
+      variant: 'Onion',
+      quantity: 2
+    })
+
+    expect(basket.items).toEqual([
+      {
+        sku: 'BGLO',
+        price: '0.49',
+        name: 'Bagel',
+        variant: 'Onion',
+        quantity: 2
+      }
+    ])
+  })
+  it('should remove bagel from basket', ()=>{
+    basket.add('BGLO')
+    basket.remove('BGLO')
+    expect(basket.items).toEqual([])
+
+  })
+//   it()
 })
-// it('should create a new basket', () => {
-//   expect(basket).toBeInstanceOf(Basket)
-//   expect(basket.basketQuantity).toBe(5)
-//   expect(basket.items.length).toBe(0)
-// })
