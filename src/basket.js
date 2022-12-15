@@ -33,9 +33,35 @@ class Basket {
     return found
 
   }
+  toMuch(){
+    const itemsQuantity = this.items.reduce((accumulator, item)=>accumulator + item.quantity, 0)
+    // let q = this.items[0].quantity
+    // const to = this.capacity >= q
+    // console.log("fulll", to, this.capacity, q)
+    const isFull = itemsQuantity === this.capacity
+    if (isFull) {
+      return true
+    }
+    return false
+    // isFull ? true : false
+  }
+  displayPrice(){
+    return inventory.map((bagel)=>{
+        const { sku, price, variant } = bagel
+        return { sku, price, variant }
+    })
+  }
+  totalCost(){
+    let total = 0
+    for(let i = 0; i < this.items.length; i++){
+        total += Number(this.items[i].price) 
+        console.log(total)
+    }
+    return total.toFixed(2)
+  }
 }
 const basket = new Basket
-console.log('hell', basket.add())
+console.log('hell', basket.displayPrice())
 
 module.exports = {
   Basket
